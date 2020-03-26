@@ -2,9 +2,14 @@ package com.example.termproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -22,94 +27,55 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 
 import javax.xml.namespace.QName;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity  {
     private TextView mTextViewResult;
     private RequestQueue mQueue;
     private Object JsonObjectRequest;
     private ListView mlistView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //InstructorSchedule instructorSchedule = new InstructorSchedule();
 
-        mlistView = findViewById(R.id.listView);
-        mTextViewResult = findViewById(R.id.tvResult);
-        Button buttonParse = findViewById(R.id.btnParse);
+        Button btnInstructor = findViewById(R.id.btnInstructor);
+        Button btnPrograms = findViewById(R.id.btnPrograms);
 
-        mQueue = Volley.newRequestQueue(this);
 
-        buttonParse.setOnClickListener(new View.OnClickListener() {
+        btnInstructor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                jsonParse();
+                Intent intent = new Intent(getApplicationContext(),InstructorActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        btnPrograms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ProgramActivity.class);
+                startActivity(intent);
             }
         });
 
     }
-    private void jsonParse(){
-        String url = "https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=4&termSchoolID=77";
-        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-
-                ArrayList<String> arrayList = new ArrayList<String>();
-
-                for(int i = 0; i < response.length(); i++) {
-                    try {
-                        arrayList.add(response.getJSONObject(i).getString("name"));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1,arrayList);
-                System.out.println(arrayAdapter);
-                mlistView.setAdapter(arrayAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            Log.d("Error Response",error.toString());
-            }
-        });
-        mQueue.add(request);
-    }
-    /*
 
 
-    private void getInstructorSchedule(int idInstructor){
-        String url = "https://timetables.bcitsitecentre.ca/api/Timetable/Instructor?instructorID="+idInstructor+"&termSchoolID=77";
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
 
-                ArrayList<String> arrayList = new ArrayList<String>();
 
-                for(int i = 0; i < response.length(); i++) {
-                    try {
-                        arrayList.add(response.getJSONObject(i).getString("name"));
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(MainActivity.this, android.R.layout.simple_list_item_1,arrayList);
-                System.out.println(arrayAdapter);
-                mlistView.setAdapter(arrayAdapter);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error Response",error.toString());
-            }
-        });
-        mQueue.add(request);
-    }
-     */
+
 }
