@@ -1,9 +1,10 @@
 package com.example.termproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -16,17 +17,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class InstructorActivity extends AppCompatActivity {
+public class InstructorComputingActivity extends AppCompatActivity {
 
     private static final String TAG = "InstructorActivity";
     private Object JsonObjectRequest;
@@ -40,17 +38,17 @@ public class InstructorActivity extends AppCompatActivity {
         mlistView = findViewById(R.id.listView);
         mQueue = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
-        jsonParse();
+        jsonParse("https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=2&termSchoolID=75");
 
     }
 
-    private void jsonParse(){
-        String url = "https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=4&termSchoolID=77";
+    public void jsonParse(String inputURL){
+        String url = inputURL;
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(final JSONArray response) {
 
-                ArrayList<String> arrayList = new ArrayList<String>();
+                final ArrayList<String> arrayList = new ArrayList<String>();
 
                 for(int i = 0; i < response.length(); i++) {
                     try {
@@ -61,7 +59,7 @@ public class InstructorActivity extends AppCompatActivity {
                     }
                 }
                 System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorActivity.this, android.R.layout.simple_list_item_1,arrayList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorComputingActivity.this, android.R.layout.simple_list_item_1,arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
@@ -69,13 +67,14 @@ public class InstructorActivity extends AppCompatActivity {
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                        startActivity(intent);
-
                         try {
                             System.out.println(response.getJSONObject(position).getString("instructorID"));
-                         //  InstructorSchedule instructorSchedule = new InstructorSchedule(3287);
-                        //   instructorSchedule.getInstructorSchedule();
+                            WebView webView = new WebView(InstructorComputingActivity.this);
+                            WebSettings webSettings = webView.getSettings();
+                            webSettings.setJavaScriptEnabled(true);
+                            setContentView(webView);
+                            webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position).getString("instructorID"));
+                            webView.loadUrl("javascript:document.");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -92,26 +91,4 @@ public class InstructorActivity extends AppCompatActivity {
         mQueue.add(request);
     }
 
-
-   /* private void getInstructorSchedule(int idInstructor){
-        String url = "https://timetables.bcitsitecentre.ca/api/Timetable/Instructor?instructorID="+idInstructor+"&termSchoolID=77";
-        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject timeTableByWeek = response.getJSONObject("timetablesByWeek");
-                    System.out.println(timeTableByWeek);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Error Response",error.toString());
-            }
-        });
-        mQueue.add(request);
-    }
-*/
 }

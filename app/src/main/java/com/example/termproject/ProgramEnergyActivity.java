@@ -1,12 +1,10 @@
 package com.example.termproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,12 +21,10 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-public class ProgramActivity extends AppCompatActivity  {
+public class ProgramEnergyActivity extends AppCompatActivity  {
 
 
     private static final String TAG = "InstructorActivity";
@@ -70,7 +66,7 @@ public class ProgramActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayList);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramActivity.this, android.R.layout.simple_list_item_1, arrayList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, android.R.layout.simple_list_item_1, arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
@@ -121,7 +117,7 @@ public class ProgramActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayListSetCode);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramActivity.this, android.R.layout.simple_list_item_1,arrayListSetCode);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, android.R.layout.simple_list_item_1,arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
@@ -129,11 +125,12 @@ public class ProgramActivity extends AppCompatActivity  {
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        WebView webView = new WebView(ProgramActivity.this);
+                        WebView webView = new WebView(ProgramEnergyActivity.this);
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
                         setContentView(webView);
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/"+arrayListSetID.get(position));
+                        webView.loadUrl("javascript:document.");
                     }
                 });
 
@@ -146,5 +143,4 @@ public class ProgramActivity extends AppCompatActivity  {
         });
         mQueue.add(request2);
     }
-
 }

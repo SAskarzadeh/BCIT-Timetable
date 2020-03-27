@@ -17,9 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InstructorActivity" />
-        <activity android:name=".InstructorSchedule" />
-        <activity android:name=".ProgramActivity" />
+        <activity android:name=".InstructorEnergyActivity" />
+        <activity android:name=".ProgramEnergyActivity" />
+        <activity android:name=".Instructor_Programs_EnergyActivity" />
+        <activity android:name=".Instructor_Programs_ComputingActivity" />
+        <activity android:name=".InstructorComputingActivity" />
+        <activity android:name=".ProgramComputingActivity" />
     </application>
 
 </manifest>
