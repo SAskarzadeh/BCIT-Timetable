@@ -81,13 +81,13 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        setContentView(R.layout.activity_web_viewer);
                         try {
                             System.out.println(response.getJSONObject(position).getString("instructorID"));
                             WebView webView = new WebView(InstructorEnergyActivity.this);
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
-                            setContentView(webView);
-                            setContentView(R.layout.activity_web_viewer);
+
                             webView = (WebView) findViewById(R.id.webViewer);
                             webView.getSettings().setJavaScriptEnabled(true);
                             webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID"));
@@ -97,6 +97,16 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        btnReturn = (Button) findViewById(R.id.btnReturn2Main);
+
+                        btnReturn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
 

@@ -3,9 +3,11 @@ package com.example.termproject;
 import android.app.DownloadManager;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -31,7 +33,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 public class InstructorComputingActivity extends AppCompatActivity {
-
     private static final String TAG = "InstructorActivity";
     private Object JsonObjectRequest;
     private ListView mlistView;
@@ -55,7 +56,6 @@ public class InstructorComputingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     public void jsonParse(String inputURL){
@@ -84,12 +84,14 @@ public class InstructorComputingActivity extends AppCompatActivity {
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        setContentView(R.layout.activity_web_viewer);
+
                         try {
                             System.out.println(response.getJSONObject(position).getString("instructorID"));
                             WebView webView = new WebView(InstructorComputingActivity.this);
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
-                            setContentView(R.layout.activity_web_viewer);
+
                             webView = (WebView) findViewById(R.id.webViewer);
                             webView.getSettings().setJavaScriptEnabled(true);
                             webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position).getString("instructorID"));
@@ -98,6 +100,16 @@ public class InstructorComputingActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        btnReturn = (Button) findViewById(R.id.btnReturn2Main);
+
+                        btnReturn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
 
                     }
 

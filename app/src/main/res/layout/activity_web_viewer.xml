@@ -4,40 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="0dp"
     tools:context=".webViewer"
     android:background="@drawable/gradient_background">
 
     <WebView
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:id="@+id/webViewer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/return2main"
-        android:background="@drawable/shadow"
-        android:elevation="5dp"
-        android:padding="5dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_below="@+id/return2main"
+        android:layout_marginBottom="0dp"/>
 
     <LinearLayout
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:id="@+id/return2main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/btntxtReturn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/btnEnergy"
-            android:layout_marginBottom="0dp"
-            android:fontFamily="@font/montserrat_regular"
-            android:text="RETURN BACK TO MAIN"
-            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btnReturn2Main"
@@ -47,10 +34,10 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="0dp"
             android:background="#016993"
             android:fontFamily="@font/montserrat_black"
-            android:text="Return"
+            android:text="Return back to main"
             android:textColor="#ffffff"
             android:textSize="15sp" />
     </LinearLayout>
