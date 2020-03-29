@@ -1,15 +1,19 @@
 package com.example.termproject;
 
+import android.app.DownloadManager;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,6 +91,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
                             setContentView(webView);
                             webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position).getString("instructorID"));
                             webView.loadUrl("javascript:document.");
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
