@@ -140,6 +140,9 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
                         setContentView(webView);
+                        setContentView(R.layout.activity_web_viewer);
+                        webView = (WebView) findViewById(R.id.webViewer);
+                        webView.getSettings().setJavaScriptEnabled(true);
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/"+arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
                     }

@@ -79,6 +79,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
+
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -88,15 +89,20 @@ public class InstructorComputingActivity extends AppCompatActivity {
                             WebView webView = new WebView(InstructorComputingActivity.this);
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
-                            setContentView(webView);
+                            setContentView(R.layout.activity_web_viewer);
+                            webView = (WebView) findViewById(R.id.webViewer);
+                            webView.getSettings().setJavaScriptEnabled(true);
                             webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position).getString("instructorID"));
                             webView.loadUrl("javascript:document.");
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
                     }
+
                 });
+
 
             }
         }, new Response.ErrorListener() {

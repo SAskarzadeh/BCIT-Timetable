@@ -87,6 +87,9 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
                             setContentView(webView);
+                            setContentView(R.layout.activity_web_viewer);
+                            webView = (WebView) findViewById(R.id.webViewer);
+                            webView.getSettings().setJavaScriptEnabled(true);
                             webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID"));
                             webView.loadUrl("javascript:document.");
 
