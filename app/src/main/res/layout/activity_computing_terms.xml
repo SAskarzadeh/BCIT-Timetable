@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".Instructor_Programs_ComputingActivity"
+    android:background="@drawable/gradient_background">
+
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btntxt"
+            android:text="SELECT A TIMETABLE"
+            android:layout_above="@+id/btnEnergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnInstructor"
+            android:text="Instructors"
+            android:layout_below="@+id/btnPrograms"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:background="#016993"/>
+
+        <Button
+            android:id="@+id/btnPrograms"
+            android:text="Programs"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:background="#016993"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/return2main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btntxtReturn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnEnergy"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="RETURN BACK TO MAIN"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnReturn2Main"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="#016993"
+            android:fontFamily="@font/montserrat_black"
+            android:text="Return"
+            android:textColor="#ffffff"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:id="@+id/title"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleBCIT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/titleTimeTable"
+                android:fontFamily="@font/montserrat_black"
+                android:text="BCIT"
+                android:textColor="#14406b"
+                android:textSize="31dp" />
+
+            <TextView
+                android:id="@+id/titleTimeTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="TIMETABLE"
+                android:textColor="#14406b"
+                android:textSize="30dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_light"
+            android:text="School of Computing and Academic - Winter 2020B" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
