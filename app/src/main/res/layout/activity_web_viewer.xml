@@ -17,7 +17,8 @@
         android:layout_above="@+id/return2main"
         android:background="@drawable/shadow"
         android:elevation="5dp"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:layout_marginStart="5dp"
