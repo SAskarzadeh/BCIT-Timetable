@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void jsonParse(){
-        String url = "https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=4&termSchoolID=77";
+        String url = "https://timetables.bcitsitecentre.ca/api/Department/Get?termSchoolID=77";
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
                 for(int i = 0; i < response.length(); i++) {
                     try {
-                        arrayList.add(response.getJSONObject(i).getString("name"));
+                        arrayList.add(response.getJSONObject(i).getString("departmentCode"));
 
                     } catch (JSONException e) {
                         e.printStackTrace();
