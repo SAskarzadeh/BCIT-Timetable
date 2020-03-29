@@ -128,7 +128,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayListSetCode);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, android.R.layout.simple_list_item_1,arrayListSetCode);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, R.layout.row,arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
