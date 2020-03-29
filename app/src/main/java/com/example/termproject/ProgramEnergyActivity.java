@@ -1,5 +1,6 @@
 package com.example.termproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -33,17 +35,26 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
     private RequestQueue mQueue;
     private JsonArrayRequest request;
     private JsonArrayRequest request2;
+    Button btnReturn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_program_list);
         mlistView = findViewById(R.id.listView_2);
+        btnReturn = findViewById(R.id.btnReturn2Main);
         mQueue = Volley.newRequestQueue(this);
       //  mQueue2 = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Department/Get?termSchoolID=77","departmentCode");
 
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void jsonParse(String inputURL, final String code){
@@ -66,7 +77,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayList);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, android.R.layout.simple_list_item_1, arrayList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row, arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 

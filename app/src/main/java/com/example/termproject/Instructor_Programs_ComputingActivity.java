@@ -12,6 +12,7 @@ public class Instructor_Programs_ComputingActivity extends AppCompatActivity {
 
     Button btnInstructor;
     Button btnPrograms;
+    Button btnReturn;
     public static final int REQUEST_CODE = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class Instructor_Programs_ComputingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_computing_terms);
         btnInstructor = findViewById(R.id.btnInstructor);
         btnPrograms = findViewById(R.id.btnPrograms);
+        btnReturn = findViewById(R.id.btnReturn2Main);
 
 
 
@@ -36,6 +38,14 @@ public class Instructor_Programs_ComputingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ProgramComputingActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });

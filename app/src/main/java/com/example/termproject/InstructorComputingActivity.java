@@ -1,5 +1,6 @@
 package com.example.termproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -30,15 +32,25 @@ public class InstructorComputingActivity extends AppCompatActivity {
     private Object JsonObjectRequest;
     private ListView mlistView;
     private RequestQueue mQueue;
+    Button btnReturn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructor_list);
         mlistView = findViewById(R.id.listView);
+        btnReturn = findViewById(R.id.btnReturn2Main);
         mQueue = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=2&termSchoolID=75");
+
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -59,7 +71,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
                     }
                 }
                 System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorComputingActivity.this, android.R.layout.simple_list_item_1,arrayList);
+                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorComputingActivity.this, R.layout.row,arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 

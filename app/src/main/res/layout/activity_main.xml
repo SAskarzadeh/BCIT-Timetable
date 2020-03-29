@@ -9,72 +9,107 @@
     android:background="@drawable/gradient_background">
 
 
-    <Button
-        android:id="@+id/btnEnergy"
-        android:layout_width="395dp"
-        android:layout_height="65dp"
-        android:layout_below="@+id/btnComputingAndAcademic"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginRight="0dp"
-        android:fontFamily="@font/montserrat_black"
-        android:text="Energy"
-        android:textSize="15sp"
-        android:textColor="#ffffff"
-        android:background="#016993"/>
-
-    <Button
-        android:id="@+id/btnComputingAndAcademic"
-        android:layout_width="395dp"
-        android:layout_height="65dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="300dp"
-        android:layout_marginRight="0dp"
-        android:fontFamily="@font/montserrat_black"
-        android:maxWidth="0dp"
-        android:text="Computing and Academic"
-        android:textSize="15sp"
-        android:textColor="#ffffff"
-        android:background="#016993"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/titleBCIT"
+        <LinearLayout
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="10dp"
-            android:layout_toStartOf="@+id/titleTimeTable"
-            android:fontFamily="@font/montserrat_black"
-            android:text="BCIT"
-            android:textColor="#14406b"
-            android:textSize="31dp" />
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleBCIT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="10dp"
+                android:layout_toStartOf="@+id/titleTimeTable"
+                android:fontFamily="@font/montserrat_black"
+                android:text="BCIT"
+                android:textColor="#14406b"
+                android:textSize="31dp" />
+
+            <TextView
+                android:id="@+id/titleTimeTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="TIMETABLE"
+                android:textColor="#14406b"
+                android:textSize="30dp" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/titleTimeTable"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="TIMETABLE"
-            android:textColor="#14406b"
-            android:textSize="30dp" />
+            android:fontFamily="@font/montserrat_light"
+            android:text="SLOGAN" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/btntxt"
+            android:text="SELECT A PROGRAM"
+            android:layout_above="@+id/btnEnergy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:fontFamily="@font/montserrat_regular"
+
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnEnergy"
+            android:text="Energy"
+            android:layout_below="@+id/btnComputingAndAcademic"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:background="#016993"/>
+
+        <Button
+            android:id="@+id/btnComputingAndAcademic"
+            android:text="Computing and Academic"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/montserrat_black"
+            android:textSize="15sp"
+            android:textColor="#ffffff"
+            android:background="#016993"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
 
