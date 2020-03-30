@@ -1,8 +1,10 @@
 package com.example.termproject;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -163,6 +165,15 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
                                 try {
 
+                                    //Runtime External storage permission for saving download files
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                                        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                                == PackageManager.PERMISSION_DENIED) {
+                                            Log.d("permission", "permission denied to WRITE_EXTERNAL_STORAGE - requesting it");
+                                            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                                            requestPermissions(permissions, 1);
+                                        }
+                                    }
                                     String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
                                     QRGenerator.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);

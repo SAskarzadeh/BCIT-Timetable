@@ -10,6 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+// todo COMP Project: this is the up to date file as 1:02PM March 30, 2020
+// todo Amine Push Check Confirmed : 1:02PM March 30, 2020
+// todo Sajjad Push Check Unconfirmed :
+// todo Akash Push Check Unconfirmed :
 
 public class MainActivity extends AppCompatActivity  {
 
