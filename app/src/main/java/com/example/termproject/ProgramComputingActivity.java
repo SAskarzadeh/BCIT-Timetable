@@ -140,8 +140,21 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
                         setContentView(webView);
+                        setContentView(R.layout.activity_web_viewer);
+                        webView = (WebView) findViewById(R.id.webViewer);
+                        webView.getSettings().setJavaScriptEnabled(true);
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
+
+                        btnReturn = (Button) findViewById(R.id.btnReturn2Main);
+
+                        btnReturn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        });
                     }
                 });
 
