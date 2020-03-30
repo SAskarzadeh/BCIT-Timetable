@@ -9,13 +9,15 @@ import android.widget.Button;
 
 public class webViewerActivity extends AppCompatActivity {
     Button btnReturn;
-    Button QR;
+    Button btnQR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_viewer);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        btnQR = findViewById(R.id.btnQR);
+
 
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,6 +26,8 @@ public class webViewerActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
 
     }
 }
