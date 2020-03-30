@@ -77,7 +77,7 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
             }
         });
 
-       
+
     }
 
     public void jsonParse(String inputURL){
