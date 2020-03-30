@@ -1,9 +1,15 @@
 package com.example.termproject;
 
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.webkit.DownloadListener;
@@ -12,6 +18,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,10 +30,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity {
@@ -36,6 +49,10 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
     private ListView mlistView;
     private RequestQueue mQueue;
     Button btnReturn;
+    Button btnQR;
+    EditText theFilter;
+    private ArrayAdapter arrayAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +60,9 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
         setContentView(R.layout.activity_instructor_list);
         mlistView = findViewById(R.id.listView);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        btnQR = findViewById(R.id.btnQR);
+        theFilter = findViewById(R.id.searchFilter);
+
         mQueue = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=4&termSchoolID=77");
@@ -51,6 +71,14 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
                 startActivity(intent);
             }
         });
@@ -72,15 +100,34 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                         e.printStackTrace();
                     }
                 }
+
+
                 System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorEnergyActivity.this, R.layout.row,arrayList);
+
+                 arrayAdapter = new ArrayAdapter(InstructorEnergyActivity.this, R.layout.row,arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
+
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (InstructorEnergyActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
 
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                     public void onItemClick(AdapterView<?> parent, View view,  final int position, long id) {
                         setContentView(R.layout.activity_web_viewer);
                         try {
                             System.out.println(response.getJSONObject(position).getString("instructorID"));
@@ -105,6 +152,45 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                             public void onClick(View view) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
+                            }
+                        });
+
+                        btnQR = (Button) findViewById(R.id.btnQR);
+
+                        btnQR.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                QRCodeWriter qrCodeWriter = new QRCodeWriter();
+                                try {
+                                    String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
+                                    BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 200, 200);
+                                    Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
+                                    for (int x = 0; x<200; x++){
+                                        for (int y=0; y<200; y++){
+                                            bitmap.setPixel(x,y,bitMatrix.get(x,y)? Color.BLACK : Color.WHITE);
+                                        }
+                                    }
+
+                                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
+                                    File f = new File(Environment.getExternalStorageDirectory()
+                                            + File.separator + "qrimage.jpg");
+                                    f.createNewFile();
+                                    FileOutputStream fo = new FileOutputStream(f);
+                                    fo.write(bytes.toByteArray());
+                                    fo.close();
+                                    //imageView.setImageBitmap(bitmap);
+
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    //intent.putExtra("BitmapImage", bitmap);
+                                    startActivity(intent);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+
                             }
                         });
                     }

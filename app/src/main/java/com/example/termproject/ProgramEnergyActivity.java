@@ -13,6 +13,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.webkit.CookieManager;
@@ -24,6 +26,7 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -54,6 +57,8 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
     private RequestQueue mQueue;
     private JsonArrayRequest request;
     private JsonArrayRequest request2;
+    EditText theFilter;
+    private ArrayAdapter arrayAdapter;
     Button btnReturn;
     private Context mContext;
     private Activity mActivity;
@@ -66,6 +71,8 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_program_list);
         mlistView = findViewById(R.id.listView_2);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        theFilter = findViewById(R.id.searchFilter);
+
         mQueue = Volley.newRequestQueue(this);
       //  mQueue2 = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
@@ -100,10 +107,26 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayList);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row, arrayList);
+                arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row, arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
+
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (ProgramEnergyActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -151,9 +174,25 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayListSetCode);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row,arrayListSetCode);
+                arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row,arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
+
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (ProgramEnergyActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
 
 
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

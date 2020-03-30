@@ -2,6 +2,8 @@ package com.example.termproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -9,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -28,13 +31,14 @@ import java.util.ArrayList;
 
 public class ProgramComputingActivity extends AppCompatActivity  {
 
-
     private static final String TAG = "InstructorActivity";
     private Object JsonObjectRequest;
     private ListView mlistView;
     private RequestQueue mQueue;
     private JsonArrayRequest request;
     private JsonArrayRequest request2;
+    EditText theFilter;
+    private ArrayAdapter arrayAdapter;
     Button btnReturn;
 
     @Override
@@ -44,7 +48,10 @@ public class ProgramComputingActivity extends AppCompatActivity  {
         mlistView = findViewById(R.id.listView_2);
         btnReturn = findViewById(R.id.btnReturn2Main);
         mQueue = Volley.newRequestQueue(this);
-      //  mQueue2 = Volley.newRequestQueue(this);
+        theFilter = findViewById(R.id.searchFilter);
+
+
+        //  mQueue2 = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Department/Get?termSchoolID=75","departmentCode");
 
@@ -77,9 +84,25 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayList);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, R.layout.row, arrayList);
+                arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, R.layout.row, arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
+
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (ProgramComputingActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
 
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity  {
 
         Button btnComputingAndAcademic = findViewById(R.id.btnComputingAndAcademic);
         Button btnEnergy = findViewById(R.id.btnEnergy);
+        //Button btnSearch = findViewById(R.id.btnSearch);
+
 
         btnComputingAndAcademic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +38,22 @@ public class MainActivity extends AppCompatActivity  {
                 startActivity(intent);
             }
         });
+
+        /*btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Instructor_Programs_ComputingActivity.class);
+                startActivity(intent);
+            }
+        });*/
+
+
+
+
+
+
+
+
 
 
     }

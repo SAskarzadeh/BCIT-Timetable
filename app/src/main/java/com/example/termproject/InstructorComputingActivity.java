@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +16,7 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -38,6 +41,10 @@ public class InstructorComputingActivity extends AppCompatActivity {
     private ListView mlistView;
     private RequestQueue mQueue;
     Button btnReturn;
+    EditText theFilter;
+
+    private ArrayAdapter arrayAdapter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +52,8 @@ public class InstructorComputingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_list);
         mlistView = findViewById(R.id.listView);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        theFilter = findViewById(R.id.searchFilter);
+
         mQueue = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Instructor/TimetableFilter?schoolID=2&termSchoolID=75");
@@ -75,10 +84,25 @@ public class InstructorComputingActivity extends AppCompatActivity {
                     }
                 }
                 System.out.println(arrayList);
-                ArrayAdapter arrayAdapter = new ArrayAdapter(InstructorComputingActivity.this, R.layout.row,arrayList);
+                 arrayAdapter = new ArrayAdapter(InstructorComputingActivity.this, R.layout.row,arrayList);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (InstructorComputingActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
 
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -125,5 +149,8 @@ public class InstructorComputingActivity extends AppCompatActivity {
         });
         mQueue.add(request);
     }
+
+
+
 
 }

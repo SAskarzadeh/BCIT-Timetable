@@ -32,7 +32,6 @@ public class Instructor_Programs_EnergyActivity extends AppCompatActivity  {
                 }
             });
 
-
             btnPrograms.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

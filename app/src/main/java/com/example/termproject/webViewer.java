@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class webViewer extends AppCompatActivity {
     Button btnReturn;
+    Button QR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
