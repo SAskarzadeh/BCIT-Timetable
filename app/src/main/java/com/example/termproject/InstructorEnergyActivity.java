@@ -174,7 +174,8 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
                                     ByteArrayOutputStream bytes = new ByteArrayOutputStream();
                                     bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
-                                    File f = new File(Environment.getExternalStorageDirectory()
+
+                                    File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
                                             + File.separator + "qrimage.jpg");
                                     f.createNewFile();
                                     FileOutputStream fo = new FileOutputStream(f);

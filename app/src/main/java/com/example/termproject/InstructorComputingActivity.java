@@ -2,9 +2,12 @@ package com.example.termproject;
 
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -29,10 +32,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class InstructorComputingActivity extends AppCompatActivity {
@@ -41,6 +50,8 @@ public class InstructorComputingActivity extends AppCompatActivity {
     private ListView mlistView;
     private RequestQueue mQueue;
     Button btnReturn;
+    Button btnQR;
+
     EditText theFilter;
 
     private ArrayAdapter arrayAdapter;
@@ -52,6 +63,8 @@ public class InstructorComputingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructor_list);
         mlistView = findViewById(R.id.listView);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        btnQR = findViewById(R.id.btnQR);
+
         theFilter = findViewById(R.id.searchFilter);
 
         mQueue = Volley.newRequestQueue(this);
@@ -107,7 +120,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         setContentView(R.layout.activity_web_viewer);
 
                         try {
@@ -132,6 +145,28 @@ public class InstructorComputingActivity extends AppCompatActivity {
                             public void onClick(View view) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
+                            }
+                        });
+
+                        btnQR = (Button) findViewById(R.id.btnQR);
+
+                        btnQR.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                try {
+
+                                String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
+                                QRGenerator.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    //intent.putExtra("BitmapImage", bitmap);
+                                    startActivity(intent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+
+
                             }
                         });
 

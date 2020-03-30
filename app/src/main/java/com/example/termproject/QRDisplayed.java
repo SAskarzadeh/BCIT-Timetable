@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -43,7 +44,8 @@ public class QRDisplayed extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String filePath = "/sdcard/qrimage.jpg";
+                String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                        + "qrimage.jpg";
                 String caption = "QR";
 
                 // Start server upload
