@@ -1,8 +1,6 @@
 package com.example.termproject;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -193,8 +191,8 @@ public class ProgramComputingActivity extends AppCompatActivity  {
 
                                 try {
                                     String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position);
-                                    QRGenerator.QRGen(url);
-                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    QRGeneratorActivity.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);
                                 } catch (Exception e) {

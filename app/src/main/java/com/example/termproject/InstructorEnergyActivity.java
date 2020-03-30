@@ -161,8 +161,8 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
 
                                     String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
-                                    QRGenerator.QRGen(url);
-                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    QRGeneratorActivity.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRGeneratorActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);
                                 } catch (Exception e) {
