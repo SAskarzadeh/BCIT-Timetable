@@ -1,11 +1,20 @@
 package com.example.termproject;
 
+import android.Manifest;
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.webkit.DownloadListener;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
@@ -13,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -22,10 +32,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity {
@@ -61,13 +77,7 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
             }
         });
 
-        btnReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
-                startActivity(intent);
-            }
-        });
+       
     }
 
     public void jsonParse(String inputURL){
@@ -151,8 +161,8 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
 
                                     String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
-                                    QRGeneratorActivity.QRGen(url);
-                                    Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
+                                    QRGenerator.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);
                                 } catch (Exception e) {
