@@ -29,8 +29,8 @@
         <Button
             android:id="@+id/btnReturn2Main"
             android:layout_width="0dp"
-            android:layout_height="65dp"
-            android:layout_alignParentTop="true"
+            android:layout_height="66dp"
+            android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:background="#016993"
             android:fontFamily="@font/montserrat_black"
