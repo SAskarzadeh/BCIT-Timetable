@@ -1,2 +1,2 @@
-rootProject.name='termProject'
+rootProject.name='BCIT-Timetable'
 include ':app'
