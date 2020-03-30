@@ -161,28 +161,10 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                             @Override
                             public void onClick(View view) {
 
-                                QRCodeWriter qrCodeWriter = new QRCodeWriter();
                                 try {
+
                                     String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
-                                    BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 200, 200);
-                                    Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
-                                    for (int x = 0; x<200; x++){
-                                        for (int y=0; y<200; y++){
-                                            bitmap.setPixel(x,y,bitMatrix.get(x,y)? Color.BLACK : Color.WHITE);
-                                        }
-                                    }
-
-                                    ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                                    bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
-
-                                    File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                                            + File.separator + "qrimage.jpg");
-                                    f.createNewFile();
-                                    FileOutputStream fo = new FileOutputStream(f);
-                                    fo.write(bytes.toByteArray());
-                                    fo.close();
-                                    //imageView.setImageBitmap(bitmap);
-
+                                    QRGenerator.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);

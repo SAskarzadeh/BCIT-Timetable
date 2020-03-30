@@ -40,6 +40,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
     EditText theFilter;
     private ArrayAdapter arrayAdapter;
     Button btnReturn;
+    Button btnQR;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_program_list);
         mlistView = findViewById(R.id.listView_2);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        btnQR = findViewById(R.id.btnQR);
         mQueue = Volley.newRequestQueue(this);
         theFilter = findViewById(R.id.searchFilter);
 
@@ -107,7 +109,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view,  int position, long id) {
                         //Intent intent = new Intent(getApplicationContext(),ProgramActivity.class);
                        // startActivity(intent);
                         try {
@@ -158,7 +160,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
 
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         WebView webView = new WebView(ProgramComputingActivity.this);
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
@@ -178,8 +180,30 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                                 startActivity(intent);
                             }
                         });
+
+
+                        btnQR = (Button) findViewById(R.id.btnQR);
+
+                        btnQR.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                try {
+                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position);
+                                    QRGenerator.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    //intent.putExtra("BitmapImage", bitmap);
+                                    startActivity(intent);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                        });
                     }
                 });
+
 
             }
         }, new Response.ErrorListener() {

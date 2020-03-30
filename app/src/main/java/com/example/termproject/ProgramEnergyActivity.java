@@ -60,6 +60,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
     EditText theFilter;
     private ArrayAdapter arrayAdapter;
     Button btnReturn;
+    Button btnQR;
     private Context mContext;
     private Activity mActivity;
     private static final int MY_PERMISSION_REQUEST_CODE = 123;
@@ -71,6 +72,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_program_list);
         mlistView = findViewById(R.id.listView_2);
         btnReturn = findViewById(R.id.btnReturn2Main);
+        btnQR = findViewById(R.id.btnQR);
         theFilter = findViewById(R.id.searchFilter);
 
         mQueue = Volley.newRequestQueue(this);
@@ -164,7 +166,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 ArrayList<String> arrayListSetCode = new ArrayList<String>();
                 final ArrayList<Integer> arrayListSetID = new ArrayList<Integer>();
 
-                for(int i = 0; i < response.length(); i++) {
+                for (int i = 0; i < response.length(); i++) {
                     try {
                         arrayListSetCode.add(response.getJSONObject(i).getString("setCode"));
                         arrayListSetID.add(response.getJSONObject(i).getInt("setID"));
@@ -174,7 +176,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayListSetCode);
 
-                arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row,arrayListSetCode);
+                arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row, arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
@@ -197,13 +199,19 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
 
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                        // Get the application context
-                        mContext = getApplicationContext();
-                        mActivity = ProgramEnergyActivity.this;
+                        WebView webView = new WebView(ProgramEnergyActivity.this);
+                        WebSettings webSettings = webView.getSettings();
+                        webSettings.setJavaScriptEnabled(true);
+                        setContentView(webView);
+                        setContentView(R.layout.activity_web_viewer);
+                        webView = (WebView) findViewById(R.id.webViewer);
+                        webView.getSettings().setJavaScriptEnabled(true);
+                        webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/" + arrayListSetID.get(position));
+                        webView.loadUrl("javascript:document.");
 
-                        //Runtime External storage permission for saving download files
+                     /*   //Runtime External storage permission for saving download files
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                     == PackageManager.PERMISSION_DENIED) {
@@ -212,41 +220,69 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                                 requestPermissions(permissions, 1);
                             }
                         }
-
-                        WebView webView = new WebView(ProgramEnergyActivity.this);
-                        WebSettings webSettings = webView.getSettings();
-
-                        webView.setWebViewClient(new WebViewClient());
-                        //webSettings.setLoadsImagesAutomatically(true);
-                        webSettings.setJavaScriptEnabled(true);
-                        //webView.clearCache(true);
-
-                        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-
-                        setContentView(webView);
-
-                        String url ="https://timetables.bcitsitecentre.ca/energy/set/77/"+arrayListSetID.get(position);
-                        webView.loadUrl(url);
+*/
+//                        WebView webView = new WebView(ProgramEnergyActivity.this);
+//                        WebSettings webSettings = webView.getSettings();
+//
+//                        webView.setWebViewClient(new WebViewClient());
+//                        //webSettings.setLoadsImagesAutomatically(true);
+//                        webSettings.setJavaScriptEnabled(true);
+//                        //webView.clearCache(true);
+//
+//                        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+//
+//                        setContentView(webView);
+//
+//                        String url ="https://timetables.bcitsitecentre.ca/energy/set/77/"+arrayListSetID.get(position);
+//                        webView.loadUrl(url);
                         //webView.loadUrl("javascript:document.");
 
                         //handle downloading
-                        webView.setDownloadListener(new DownloadListener() {
+//                        webView.setDownloadListener(new DownloadListener() {
+//                            @Override
+//                            public void onDownloadStart(String url, String userAgent, String      contentDisposition , String mimeType, long contentLength) {
+//
+//                                   /* Uri uri = Uri.parse("googlechrome://navigate?url=" + "naruto.com");
+//                                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
+//                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                    startActivity(i);*/
+//
+//                                Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+//                                startActivity(openUrlIntent);
+//
+//                            }
+//                        });
+
+                        btnReturn = (Button) findViewById(R.id.btnReturn2Main);
+
+                        btnReturn.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onDownloadStart(String url, String userAgent, String      contentDisposition , String mimeType, long contentLength) {
-
-                                   /* Uri uri = Uri.parse("googlechrome://navigate?url=" + "naruto.com");
-                                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
-                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                    startActivity(i);*/
-
-                                Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                                startActivity(openUrlIntent);
-
+                            public void onClick(View view) {
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                         });
 
+                        btnQR = (Button) findViewById(R.id.btnQR);
+
+                        btnQR.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                try {
+                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/" + arrayListSetID.get(position);
+                                    QRGenerator.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    //intent.putExtra("BitmapImage", bitmap);
+                                    startActivity(intent);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
                     }
                 });
+
 
             }
         }, new Response.ErrorListener() {
@@ -256,60 +292,56 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
             }
         });
         mQueue.add(request2);
-
     }
 
 
-
-
-    protected void checkPermission(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-                if(shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                    // show an alert dialog
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
-                    builder.setMessage("Write external storage permission is required.");
-                    builder.setTitle("Please grant permission");
-                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
+            protected void checkPermission() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                            // show an alert dialog
+                            AlertDialog.Builder builder = new AlertDialog.Builder(mActivity);
+                            builder.setMessage("Write external storage permission is required.");
+                            builder.setTitle("Please grant permission");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    ActivityCompat.requestPermissions(
+                                            mActivity,
+                                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                            MY_PERMISSION_REQUEST_CODE
+                                    );
+                                }
+                            });
+                            builder.setNeutralButton("Cancel", null);
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        } else {
+                            // Request permission
                             ActivityCompat.requestPermissions(
                                     mActivity,
                                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                                     MY_PERMISSION_REQUEST_CODE
                             );
                         }
-                    });
-                    builder.setNeutralButton("Cancel",null);
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }else {
-                    // Request permission
-                    ActivityCompat.requestPermissions(
-                            mActivity,
-                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                            MY_PERMISSION_REQUEST_CODE
-                    );
-                }
-            }else {
-                // Permission already granted
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-        switch(requestCode){
-            case MY_PERMISSION_REQUEST_CODE:{
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                    // Permission granted
-                }else {
-                    // Permission denied
+                    } else {
+                        // Permission already granted
+                    }
                 }
             }
+
+            @Override
+            public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+                switch (requestCode) {
+                    case MY_PERMISSION_REQUEST_CODE: {
+                        if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                            // Permission granted
+                        } else {
+                            // Permission denied
+                        }
+                    }
+                }
+            }
+
+
         }
-    }
-
-
-
-}
