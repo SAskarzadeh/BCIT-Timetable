@@ -1,8 +1,10 @@
 package com.example.termproject;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -162,6 +164,7 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                             public void onClick(View view) {
 
                                 try {
+
 
                                     String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
                                     QRGenerator.QRGen(url);

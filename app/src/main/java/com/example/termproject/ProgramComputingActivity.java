@@ -1,6 +1,8 @@
 package com.example.termproject;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -170,6 +172,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                         webView.getSettings().setJavaScriptEnabled(true);
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
+
 
                         btnReturn = (Button) findViewById(R.id.btnReturn2Main);
 

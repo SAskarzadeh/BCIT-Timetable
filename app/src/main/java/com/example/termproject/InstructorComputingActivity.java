@@ -1,7 +1,9 @@
 package com.example.termproject;
 
+import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;

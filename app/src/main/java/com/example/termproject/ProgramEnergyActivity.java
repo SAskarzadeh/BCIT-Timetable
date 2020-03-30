@@ -211,7 +211,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/" + arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
 
-                     /*   //Runtime External storage permission for saving download files
+                        //Runtime External storage permission for saving download files
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
                             if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                     == PackageManager.PERMISSION_DENIED) {
@@ -220,38 +220,6 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                                 requestPermissions(permissions, 1);
                             }
                         }
-*/
-//                        WebView webView = new WebView(ProgramEnergyActivity.this);
-//                        WebSettings webSettings = webView.getSettings();
-//
-//                        webView.setWebViewClient(new WebViewClient());
-//                        //webSettings.setLoadsImagesAutomatically(true);
-//                        webSettings.setJavaScriptEnabled(true);
-//                        //webView.clearCache(true);
-//
-//                        webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-//
-//                        setContentView(webView);
-//
-//                        String url ="https://timetables.bcitsitecentre.ca/energy/set/77/"+arrayListSetID.get(position);
-//                        webView.loadUrl(url);
-                        //webView.loadUrl("javascript:document.");
-
-                        //handle downloading
-//                        webView.setDownloadListener(new DownloadListener() {
-//                            @Override
-//                            public void onDownloadStart(String url, String userAgent, String      contentDisposition , String mimeType, long contentLength) {
-//
-//                                   /* Uri uri = Uri.parse("googlechrome://navigate?url=" + "naruto.com");
-//                                    Intent i = new Intent(Intent.ACTION_VIEW, uri);
-//                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    startActivity(i);*/
-//
-//                                Intent openUrlIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-//                                startActivity(openUrlIntent);
-//
-//                            }
-//                        });
 
                         btnReturn = (Button) findViewById(R.id.btnReturn2Main);
 
