@@ -3,37 +3,27 @@ package com.example.termproject;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DownloadManager;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.webkit.CookieManager;
-import android.webkit.DownloadListener;
-import android.webkit.URLUtil;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -45,7 +35,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.net.URLDecoder;
 import java.util.ArrayList;
 
 public class ProgramEnergyActivity extends AppCompatActivity  {
@@ -239,8 +228,8 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
 
                                 try {
                                     String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/" + arrayListSetID.get(position);
-                                    QRGenerator.QRGen(url);
-                                    Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
+                                    QRGeneratorActivity.QRGen(url);
+                                    Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);
                                 } catch (Exception e) {

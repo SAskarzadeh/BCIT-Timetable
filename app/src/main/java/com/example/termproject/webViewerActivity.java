@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class webViewer extends AppCompatActivity {
+public class webViewerActivity extends AppCompatActivity {
     Button btnReturn;
     Button QR;
 

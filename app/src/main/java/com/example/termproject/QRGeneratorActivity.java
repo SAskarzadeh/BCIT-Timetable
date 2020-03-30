@@ -13,7 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-public class QRGenerator {
+public class QRGeneratorActivity {
 
 
 

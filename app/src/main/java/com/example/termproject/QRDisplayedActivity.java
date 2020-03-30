@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.OutputStream;
 
-public class QRDisplayed extends AppCompatActivity {
+public class QRDisplayedActivity extends AppCompatActivity {
     private ImageView imageView;
 
     Button Share_btn;
