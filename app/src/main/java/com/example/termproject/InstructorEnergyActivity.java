@@ -77,13 +77,7 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
             }
         });
 
-        btnReturn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);
-                startActivity(intent);
-            }
-        });
+       
     }
 
     public void jsonParse(String inputURL){
