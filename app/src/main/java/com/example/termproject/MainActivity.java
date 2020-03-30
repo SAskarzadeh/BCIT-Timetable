@@ -26,6 +26,15 @@ public class MainActivity extends AppCompatActivity  {
         Button btnEnergy = findViewById(R.id.btnEnergy);
         //Button btnSearch = findViewById(R.id.btnSearch);
 
+        //Runtime External storage permission for saving download files
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_DENIED) {
+                Log.d("permission", "permission denied to WRITE_EXTERNAL_STORAGE - requesting it");
+                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                requestPermissions(permissions, 1);
+            }
+        }
 
         btnComputingAndAcademic.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -173,6 +173,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
 
+
                         btnReturn = (Button) findViewById(R.id.btnReturn2Main);
 
                         btnReturn.setOnClickListener(new View.OnClickListener() {
@@ -191,17 +192,6 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                             public void onClick(View view) {
 
                                 try {
-
-                                    //Runtime External storage permission for saving download files
-                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                                        if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                                                == PackageManager.PERMISSION_DENIED) {
-                                            Log.d("permission", "permission denied to WRITE_EXTERNAL_STORAGE - requesting it");
-                                            String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
-                                            requestPermissions(permissions, 1);
-                                        }
-                                    }
-
                                     String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position);
                                     QRGenerator.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayed.class);

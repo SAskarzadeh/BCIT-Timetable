@@ -211,6 +211,15 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                         webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/" + arrayListSetID.get(position));
                         webView.loadUrl("javascript:document.");
 
+                        //Runtime External storage permission for saving download files
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                                    == PackageManager.PERMISSION_DENIED) {
+                                Log.d("permission", "permission denied to WRITE_EXTERNAL_STORAGE - requesting it");
+                                String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                                requestPermissions(permissions, 1);
+                            }
+                        }
 
 //                        WebView webView = new WebView(ProgramEnergyActivity.this);
 //                        WebSettings webSettings = webView.getSettings();
