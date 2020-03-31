@@ -108,15 +108,17 @@ public class InstructorComputingActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                         setContentView(R.layout.activity_web_viewer);
 
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayList.indexOf(item);
                         try {
-                            System.out.println(response.getJSONObject(position).getString("instructorID"));
+                            System.out.println(response.getJSONObject(position2).getString("instructorID"));
                             WebView webView = new WebView(InstructorComputingActivity.this);
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
 
                             webView = (WebView) findViewById(R.id.webViewer);
                             webView.getSettings().setJavaScriptEnabled(true);
-                            webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position).getString("instructorID"));
+                            webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/instructor/75/"+response.getJSONObject(position2).getString("instructorID"));
                             webView.loadUrl("javascript:document.");
 
                         } catch (JSONException e) {
@@ -141,7 +143,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
 
                                 try {
 
-                                String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
+                                String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position2).getString("instructorID");
                                 QRGeneratorActivity.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);

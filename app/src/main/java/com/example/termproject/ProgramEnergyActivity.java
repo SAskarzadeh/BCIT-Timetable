@@ -85,7 +85,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
             @Override
             public void onResponse(final JSONArray response) {
 
-                ArrayList<String> arrayList = new ArrayList<String>();
+                final ArrayList<String> arrayList = new ArrayList<String>();
                 final ArrayList<Integer> arrayListID = new ArrayList<Integer>();
 
                 for(int i = 0; i < response.length(); i++) {
@@ -124,10 +124,14 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         //Intent intent = new Intent(getApplicationContext(),ProgramActivity.class);
                        // startActivity(intent);
+
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayList.indexOf(item);
+
                         try {
                             System.out.println(response.getJSONObject(position).getString(code));
-                            System.out.println(arrayListID.get(position));
-                            jsonParse2("https://timetables.bcitsitecentre.ca/api/Set/Get?departmentID="+arrayListID.get(position)+"&termSchoolID=77",response.getJSONObject(position).getString(code));
+                            System.out.println(arrayListID.get(position2));
+                            jsonParse2("https://timetables.bcitsitecentre.ca/api/Set/Get?departmentID="+arrayListID.get(position2)+"&termSchoolID=77",response.getJSONObject(position2).getString(code));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -152,7 +156,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
             @Override
             public void onResponse(final JSONArray response) {
 
-                ArrayList<String> arrayListSetCode = new ArrayList<String>();
+                final ArrayList<String> arrayListSetCode = new ArrayList<String>();
                 final ArrayList<Integer> arrayListSetID = new ArrayList<Integer>();
 
                 for (int i = 0; i < response.length(); i++) {
@@ -168,6 +172,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 arrayAdapter = new ArrayAdapter(ProgramEnergyActivity.this, R.layout.row, arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
+
 
                 theFilter.addTextChangedListener(new TextWatcher() {
                     @Override
@@ -190,6 +195,9 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayListSetCode.indexOf(item);
+
                         WebView webView = new WebView(ProgramEnergyActivity.this);
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
@@ -197,7 +205,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                         setContentView(R.layout.activity_web_viewer);
                         webView = (WebView) findViewById(R.id.webViewer);
                         webView.getSettings().setJavaScriptEnabled(true);
-                        webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/" + arrayListSetID.get(position));
+                        webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/set/77/" + arrayListSetID.get(position2));
                         webView.loadUrl("javascript:document.");
 
                         //Runtime External storage permission for saving download files
@@ -227,7 +235,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                             public void onClick(View view) {
 
                                 try {
-                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/" + arrayListSetID.get(position);
+                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/" + arrayListSetID.get(position2);
                                     QRGeneratorActivity.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);

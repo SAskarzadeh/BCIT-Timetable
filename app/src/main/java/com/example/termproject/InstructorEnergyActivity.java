@@ -97,16 +97,15 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
                     }
                 }
 
-
                 System.out.println(arrayList);
 
-                 arrayAdapter = new ArrayAdapter(InstructorEnergyActivity.this, R.layout.row,arrayList);
+                arrayAdapter = new ArrayAdapter(InstructorEnergyActivity.this, R.layout.row,arrayList);
                 System.out.println(arrayAdapter);
-                mlistView.setAdapter(arrayAdapter);
 
                 theFilter.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                     }
 
                     @Override
@@ -119,21 +118,33 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
                     }
                 });
+                mlistView.setAdapter(arrayAdapter);
+
 
                 //OnitemClickListner
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                      public void onItemClick(AdapterView<?> parent, View view,  final int position, long id) {
                         setContentView(R.layout.activity_web_viewer);
+
+                        //System.out.println("position set of one " + position);
+
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayList.indexOf(item);
+
+
+                        //System.out.println("position set of new " + item);
+                        //System.out.println("position set of new number " + position2);
+
                         try {
-                            System.out.println(response.getJSONObject(position).getString("instructorID"));
+                            System.out.println(response.getJSONObject(position2).getString("instructorID"));
                             WebView webView = new WebView(InstructorEnergyActivity.this);
                             WebSettings webSettings = webView.getSettings();
                             webSettings.setJavaScriptEnabled(true);
 
                             webView = (WebView) findViewById(R.id.webViewer);
                             webView.getSettings().setJavaScriptEnabled(true);
-                            webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID"));
+                            webView.loadUrl("https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position2).getString("instructorID"));
                             webView.loadUrl("javascript:document.");
 
 
@@ -159,7 +170,7 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
                                 try {
 
-                                    String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position).getString("instructorID");
+                                    String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position2).getString("instructorID");
                                     QRGeneratorActivity.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
@@ -172,8 +183,6 @@ public class InstructorEnergyActivity extends Instructor_Programs_EnergyActivity
 
                             }
                         });
-                       
-
 
                     }
                 });

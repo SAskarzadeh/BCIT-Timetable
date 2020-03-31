@@ -30,7 +30,8 @@ public class QRDisplayedActivity extends AppCompatActivity {
         Share_btn = findViewById(R.id.Share_btn);
         Return_btn = findViewById(R.id.Return_btn);
 
-        File imgFile = new  File("/sdcard/qrimage.jpg");
+        File imgFile = new  File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                + File.separator + "qrimage.jpg");
         //Here File file = ur file path
         if(imgFile.exists())
         {
@@ -45,7 +46,7 @@ public class QRDisplayedActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String filePath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                        + "qrimage.jpg";
+                        + File.separator + "qrimage.jpg";
                 String caption = "QR";
 
                 // Start server upload

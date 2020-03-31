@@ -73,7 +73,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
             @Override
             public void onResponse(final JSONArray response) {
 
-                ArrayList<String> arrayList = new ArrayList<String>();
+                final ArrayList<String> arrayList = new ArrayList<String>();
                 final ArrayList<Integer> arrayListID = new ArrayList<Integer>();
 
                 for(int i = 0; i < response.length(); i++) {
@@ -112,10 +112,13 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                     public void onItemClick(AdapterView<?> parent, View view,  int position, long id) {
                         //Intent intent = new Intent(getApplicationContext(),ProgramActivity.class);
                        // startActivity(intent);
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayList.indexOf(item);
+
                         try {
-                            System.out.println(response.getJSONObject(position).getString(code));
-                            System.out.println(arrayListID.get(position));
-                            jsonParse2("https://timetables.bcitsitecentre.ca/api/Set/Get?departmentID="+arrayListID.get(position)+"&termSchoolID=75",response.getJSONObject(position).getString(code));
+                            System.out.println(response.getJSONObject(position2).getString(code));
+                            System.out.println(arrayListID.get(position2));
+                            jsonParse2("https://timetables.bcitsitecentre.ca/api/Set/Get?departmentID="+arrayListID.get(position2)+"&termSchoolID=75",response.getJSONObject(position2).getString(code));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -140,7 +143,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
             @Override
             public void onResponse(final JSONArray response) {
 
-                ArrayList<String> arrayListSetCode = new ArrayList<String>();
+                final ArrayList<String> arrayListSetCode = new ArrayList<String>();
                 final ArrayList<Integer> arrayListSetID = new ArrayList<Integer>();
 
                 for(int i = 0; i < response.length(); i++) {
@@ -153,14 +156,35 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                 }
                 System.out.println(arrayListSetCode);
 
-                ArrayAdapter arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, R.layout.row,arrayListSetCode);
+                arrayAdapter = new ArrayAdapter(ProgramComputingActivity.this, R.layout.row, arrayListSetCode);
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
 
+                theFilter.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        (ProgramComputingActivity.this).arrayAdapter.getFilter().filter(charSequence);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                        String item = (String) parent.getItemAtPosition(position);
+                        final int position2 = arrayListSetCode.indexOf(item);
+
+
                         WebView webView = new WebView(ProgramComputingActivity.this);
                         WebSettings webSettings = webView.getSettings();
                         webSettings.setJavaScriptEnabled(true);
@@ -168,7 +192,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                         setContentView(R.layout.activity_web_viewer);
                         webView = (WebView) findViewById(R.id.webViewer);
                         webView.getSettings().setJavaScriptEnabled(true);
-                        webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position));
+                        webView.loadUrl("https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position2));
                         webView.loadUrl("javascript:document.");
 
 
@@ -190,7 +214,7 @@ public class ProgramComputingActivity extends AppCompatActivity  {
                             public void onClick(View view) {
 
                                 try {
-                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position);
+                                    String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/"+arrayListSetID.get(position2);
                                     QRGeneratorActivity.QRGen(url);
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
