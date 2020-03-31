@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.termproject">
+    package="com.termproject.BCITTimetable">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
@@ -13,20 +13,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.termproject.BCITTimetable.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InstructorEnergyActivity" />
-        <activity android:name=".ProgramEnergyActivity" />
-        <activity android:name=".Instructor_Programs_EnergyActivity" />
-        <activity android:name=".Instructor_Programs_ComputingActivity" />
-        <activity android:name=".InstructorComputingActivity" />
-        <activity android:name=".ProgramComputingActivity" />
-        <activity android:name=".QRDisplayedActivity"/>
+        <activity android:name="com.termproject.BCITTimetable.InstructorEnergyActivity" />
+        <activity android:name="com.termproject.BCITTimetable.ProgramEnergyActivity" />
+        <activity android:name="com.termproject.BCITTimetable.Instructor_Programs_EnergyActivity" />
+        <activity android:name="com.termproject.BCITTimetable.Instructor_Programs_ComputingActivity" />
+        <activity android:name="com.termproject.BCITTimetable.InstructorComputingActivity" />
+        <activity android:name="com.termproject.BCITTimetable.ProgramComputingActivity" />
+        <activity android:name="com.termproject.BCITTimetable.QRDisplayedActivity"/>
 
     </application>
 

@@ -64,7 +64,7 @@
 
         <TextView
             android:id="@+id/btntxt"
-            android:text="SELECT A PROGRAM"
+            android:text="SELECT A SCHOOL"
             android:layout_above="@+id/btnEnergy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
