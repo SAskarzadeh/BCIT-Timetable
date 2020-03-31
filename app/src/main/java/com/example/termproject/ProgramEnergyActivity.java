@@ -65,7 +65,6 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
         theFilter = findViewById(R.id.searchFilter);
 
         mQueue = Volley.newRequestQueue(this);
-      //  mQueue2 = Volley.newRequestQueue(this);
         Log.d(TAG, "onCreate: started.");
         jsonParse("https://timetables.bcitsitecentre.ca/api/Department/Get?termSchoolID=77","departmentCode");
 
@@ -102,10 +101,10 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
                 System.out.println(arrayAdapter);
                 mlistView.setAdapter(arrayAdapter);
 
-
                 theFilter.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
                     }
 
                     @Override
@@ -189,7 +188,6 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
 
                     }
                 });
-
 
                 mlistView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
