@@ -14,8 +14,6 @@ import java.io.FileOutputStream;
 
 public class QRGeneratorActivity {
 
-
-
     public static void QRGen(String url) {
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();

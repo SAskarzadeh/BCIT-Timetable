@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 allprojects {
     repositories {
         mavenCentral()
@@ -12,6 +13,12 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
 
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
     defaultConfig {
         applicationId "com.termproject.BCITTimetable"
         minSdkVersion 19
