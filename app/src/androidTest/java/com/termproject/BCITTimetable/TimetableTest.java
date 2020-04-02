@@ -1,14 +1,44 @@
 package com.termproject.BCITTimetable;
 
+import android.os.SystemClock;
+import android.view.View;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.test.espresso.DataInteraction;
+import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.action.CoordinatesProvider;
+import androidx.test.espresso.action.GeneralClickAction;
+import androidx.test.espresso.action.GeneralLocation;
+import androidx.test.espresso.action.GeneralSwipeAction;
+import androidx.test.espresso.action.Press;
+import androidx.test.espresso.action.Swipe;
+import androidx.test.espresso.action.Tap;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.espresso.web.webdriver.Locator;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.longClick;
+import static androidx.test.espresso.action.ViewActions.swipeDown;
+import static androidx.test.espresso.action.ViewActions.swipeUp;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.web.sugar.Web.onWebView;
+import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasEntry;
 
 @RunWith(AndroidJUnit4.class)
 public class TimetableTest {
@@ -19,32 +49,84 @@ public class TimetableTest {
 
     @Test
     public void TestFilter() {
-       /* for (int i = 0; i <= 3; i++) {
-            onView(withId(R.id.btnRight)).perform(click());
-        }
-        onView(withId(R.id.btnSearch)).perform(click());
-        onView(withId(R.id.etFromDateTime)).perform(clearText());
-        onView(withId(R.id.etFromDateTime)).perform(typeText("2008:10:01 23:11"), closeSoftKeyboard());
-        onView(withId(R.id.etToDateTime)).perform(clearText());
-        onView(withId(R.id.etToDateTime)).perform(typeText("2021:10:01 23:45"), closeSoftKeyboard());
-        onView(withId(R.id.etKeywords)).perform(typeText("BCIT"), closeSoftKeyboard());
 
-        onView(withId(R.id.fromLat)).perform(clearText());
-        onView(withId(R.id.fromLat)).perform(typeText("46"),closeSoftKeyboard());
-        onView(withId(R.id.toLat)).perform(clearText());
-        onView(withId(R.id.toLat)).perform(typeText("50"),closeSoftKeyboard());
-        onView(withId(R.id.fromLon)).perform(clearText());
-        onView(withId(R.id.fromLon)).perform(typeText("-150.0"),closeSoftKeyboard());
-        onView(withId(R.id.toLon)).perform(clearText());
-        onView(withId(R.id.toLon)).perform(typeText("0"),closeSoftKeyboard());
+        //School of Energy - Instructor
+        SystemClock.sleep(1000);
+        onView(withId(R.id.btnEnergy)).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.btnInstructor)).perform(click());
+        SystemClock.sleep(500);
+        onView(withId(R.id.searchFilter)).perform(typeText("Romalo"));
+        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
+        SystemClock.sleep(3000);
+        onView(withId(R.id.webViewer)).perform(swipeUp());
+        SystemClock.sleep(500);
+        onView(withId(R.id.webViewer)).perform(swipeDown());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.btnQR)).perform(click());
+        SystemClock.sleep(1500);
+        onView(withId(R.id.Return_btn)).perform(click());
+        SystemClock.sleep(1000);
 
-        onView(withId(R.id.go)).perform(click());
-        for (int i = 0; i <= 3; i++) {
-            onView(withId(R.id.btnRight)).perform(click());
-        }
+        //School of Computing & Academic - Instructor
+        onView(withId(R.id.btnComputingAndAcademic)).perform(click());
+        SystemClock.sleep(500);
+        onView(withId(R.id.btnInstructor)).perform(click());
+        SystemClock.sleep(500);
+        onView(withId(R.id.searchFilter)).perform(typeText("Tejinder"));
+        onData(anything()).inAdapterView(withId(R.id.listView)).atPosition(0).perform(click());
+        SystemClock.sleep(3000);
+        onView(withId(R.id.webViewer)).perform(swipeUp());
+        SystemClock.sleep(500);
+        onView(withId(R.id.webViewer)).perform(swipeDown());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.btnQR)).perform(click());
+        SystemClock.sleep(1500);
+        onView(withId(R.id.Return_btn)).perform(click());
+        SystemClock.sleep(1000);
 
-        for (int i = 0; i <= 5; i++) {
-            onView(withId(R.id.btnLeft)).perform(click());
-        }*/
+        //School of Energy - Programs
+        onView(withId(R.id.btnEnergy)).perform(click());
+        SystemClock.sleep(500);
+        onView(withId(R.id.btnPrograms)).perform(click());
+        SystemClock.sleep(1000);
+        onData(anything()).inAdapterView(withId(R.id.listView_2)).atPosition(2).perform(click());
+        SystemClock.sleep(1000);
+        onData(anything()).inAdapterView(withId(R.id.listView_2)).atPosition(5).perform(click());
+        SystemClock.sleep(3000);
+        onView(withId(R.id.webViewer)).perform(swipeUp());
+        SystemClock.sleep(500);
+        onView(withId(R.id.webViewer)).perform(swipeDown());
+        SystemClock.sleep(500);
+        onView(withId(R.id.btnQR)).perform(click());
+        SystemClock.sleep(2000);
+        onView(withId(R.id.Return_btn)).perform(click());
+        SystemClock.sleep(1000);
+
+        //School of Computing & Academic- Programs
+        onView(withId(R.id.btnComputingAndAcademic)).perform(click());
+        SystemClock.sleep(500);
+        onView(withId(R.id.btnPrograms)).perform(click());
+        SystemClock.sleep(1000);
+        onData(anything()).inAdapterView(withId(R.id.listView_2)).atPosition(1).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.listView_2)).perform(swipeUp());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.listView_2)).perform(swipeDown());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.searchFilter)).perform(typeText("COMP 1 E"));
+        onData(anything()).inAdapterView(withId(R.id.listView_2)).atPosition(0).perform(click());
+        SystemClock.sleep(3000);
+        onView(withId(R.id.webViewer)).perform(swipeUp());
+        SystemClock.sleep(500);
+        onView(withId(R.id.webViewer)).perform(swipeDown());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.btnQR)).perform(click());
+        SystemClock.sleep(1000);
+        onView(withId(R.id.Share_btn)).perform(click());
+        SystemClock.sleep(100);
+
     }
+
+
 }

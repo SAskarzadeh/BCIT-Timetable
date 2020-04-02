@@ -77,7 +77,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
         });
     }
 
-    private void jsonParse(String inputURL, final String code){
+    public void jsonParse(String inputURL, final String code){
         String url = inputURL;
         System.out.println(inputURL);
         request = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
