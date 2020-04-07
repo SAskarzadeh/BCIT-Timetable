@@ -1,10 +1,10 @@
 package com.termproject.BCITTimetable;
 
+import com.termproject.BCITTimetable.QRCode.QRGeneratorActivity;
+
 import org.junit.Test;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
 
 import static org.junit.Assert.assertEquals;
 

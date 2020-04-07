@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable;
+package com.termproject.BCITTimetable.Main;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.termproject.BCITTimetable.Instructor.InstructorEnergyActivity;
+import com.termproject.BCITTimetable.Program.ProgramEnergyActivity;
+import com.termproject.BCITTimetable.R;
 
 
 public class Instructor_Programs_EnergyActivity extends AppCompatActivity  {
