@@ -1,5 +1,7 @@
 package com.termproject.BCITTimetable;
 
+import android.os.Environment;
+
 import org.junit.Test;
 
 import java.io.File;
@@ -23,7 +25,8 @@ public class BCITTimetableUnitTest {
             filepath_expected="/storage/emulated/0/qrimage.jpg";
 
             QRGeneratorActivity.QRGen(url);
-            filepath_result = QRGeneratorActivity.f;
+            filepath_result = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
+                    + File.separator + "qrimage.jpg");
             File expected = new File(filepath_expected);
             assertEquals(expected, filepath_result);
         }
