@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable;
+package com.termproject.BCITTimetable.QRCode;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;

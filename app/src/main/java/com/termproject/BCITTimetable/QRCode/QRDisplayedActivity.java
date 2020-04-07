@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable;
+package com.termproject.BCITTimetable.QRCode;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -13,6 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.termproject.BCITTimetable.Main.MainActivity;
+import com.termproject.BCITTimetable.R;
 
 import java.io.File;
 import java.io.OutputStream;

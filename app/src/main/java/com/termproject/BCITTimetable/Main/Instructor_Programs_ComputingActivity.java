@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable;
+package com.termproject.BCITTimetable.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,10 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.termproject.BCITTimetable.Instructor.InstructorComputingActivity;
+import com.termproject.BCITTimetable.Program.ProgramComputingActivity;
+import com.termproject.BCITTimetable.R;
 
 
 public class Instructor_Programs_ComputingActivity extends AppCompatActivity {
