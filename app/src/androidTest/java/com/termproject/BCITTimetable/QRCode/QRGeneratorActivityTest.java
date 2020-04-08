@@ -21,23 +21,24 @@ public class QRGeneratorActivityTest {
 
         String expected = "true";
         String result;
+        String url_expected = "https://timetables.bcitsitecentre.ca/energy/instructor/77/3287";
+        String url_test = "https://timetables.bcitsitecentre.ca/energy/instructor/77/3287";
+
+        String filepath_expected = "/storage/emulated/0/qrimageexpected.jpg";
         String filepath_result = "/storage/emulated/0/qrimage.jpg";
-        String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/3342";
-
-
-        File imgFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                + File.separator + "qrimageexpected.jpg");
-        Bitmap myBitmapexpected = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
         QRGeneratorActivity qRGeneratorActivity = new QRGeneratorActivity();
 
-        qRGeneratorActivity.QRGen(url);
+        qRGeneratorActivity.QRGen(url_expected, "qrimageexpected.jpg");
+        File imgFile = new File(filepath_expected);
+        Bitmap myBitmapexpected = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
+
+        qRGeneratorActivity.QRGen(url_test, "qrimage.jpg");
         File imgFile2 = new File(filepath_result);
+         Bitmap myBitmapresult = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
 
-        Bitmap myBitmapresult = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
-        if (myBitmapresult.sameAs(myBitmapexpected)) {
-
+         if (myBitmapresult.sameAs(myBitmapexpected)) {
             result = "true";
         } else {
             result = "false";

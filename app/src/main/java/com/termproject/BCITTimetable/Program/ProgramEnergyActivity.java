@@ -238,7 +238,7 @@ public class ProgramEnergyActivity extends AppCompatActivity  {
 
                                 try {
                                     String url = "https://timetables.bcitsitecentre.ca/computing-and-academic/set/75/" + arrayListSetID.get(position2);
-                                    QRGeneratorActivity.QRGen(url);
+                                    QRGeneratorActivity.QRGen(url, "qrimage.jpg");
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);

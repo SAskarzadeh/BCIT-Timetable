@@ -16,16 +16,16 @@ import java.nio.ByteBuffer;
 
 public class QRGeneratorActivity {
 
-    public static void QRGen(String url) {
+    public static void QRGen(String url, String ImageName) {
 
-        byte[] buff = null;
+        Bitmap bitmap = null;
         String filepath = Environment.getExternalStorageDirectory().getAbsolutePath()
-                + File.separator + "qrimage.jpg";
+                + File.separator + ImageName;
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
             BitMatrix bitMatrix = qrCodeWriter.encode(url, BarcodeFormat.QR_CODE, 200, 200);
-            Bitmap bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
+             bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.RGB_565);
             for (int x = 0; x<200; x++){
                 for (int y=0; y<200; y++){
                     bitmap.setPixel(x,y,bitMatrix.get(x,y)? Color.BLACK : Color.WHITE);
@@ -52,7 +52,7 @@ public class QRGeneratorActivity {
             e.printStackTrace();
         }
 //        finally {
-//            return(buff);
+//           return(bitmap);
 //        }
 
     }

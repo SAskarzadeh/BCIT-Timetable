@@ -148,7 +148,7 @@ public class InstructorComputingActivity extends AppCompatActivity {
                                 try {
 
                                 String url = "https://timetables.bcitsitecentre.ca/energy/instructor/77/"+response.getJSONObject(position2).getString("instructorID");
-                                QRGeneratorActivity.QRGen(url);
+                                QRGeneratorActivity.QRGen(url, "qrimage.jpg");
                                     Intent intent = new Intent(getApplicationContext(), QRDisplayedActivity.class);
                                     //intent.putExtra("BitmapImage", bitmap);
                                     startActivity(intent);
