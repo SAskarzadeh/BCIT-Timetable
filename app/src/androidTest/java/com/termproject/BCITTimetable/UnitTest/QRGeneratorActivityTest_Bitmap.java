@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable.QRCode;
+package com.termproject.BCITTimetable.UnitTest;
 
 import android.graphics.Bitmap;
 
