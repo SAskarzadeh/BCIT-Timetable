@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable.QRCode;
+package com.termproject.BCITTimetable.UnitTest;
 
 import android.graphics.Bitmap;
 
@@ -20,7 +20,7 @@ public class QRGeneratorActivityTest_URL {
 
         String expected = "true";
         String url_expected = "https://timetables.bcitsitecentre.ca/energy/instructor/77/3287";
-        String url_test = "https://timetables.bcitsitecentre.ca/energy/instructor/77/32877";
+        String url_test = "https://timetables.bcitsitecentre.ca/energy/instructor/77/3287";
         String url_result;
 
         QRGeneratorActivity qRGeneratorActivity = new QRGeneratorActivity();
