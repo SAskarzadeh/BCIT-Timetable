@@ -16,7 +16,7 @@ import java.nio.ByteBuffer;
 
 public class QRGeneratorActivity {
 
-    public static void QRGen(String url, String ImageName) {
+    public static Bitmap QRGen(String url, String ImageName) {
 
         Bitmap bitmap = null;
         String filepath = Environment.getExternalStorageDirectory().getAbsolutePath()
@@ -51,9 +51,9 @@ public class QRGeneratorActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        finally {
-//           return(bitmap);
-//        }
+        finally {
+           return(bitmap);
+        }
 
     }
 

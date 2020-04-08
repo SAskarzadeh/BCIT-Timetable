@@ -29,14 +29,14 @@ public class QRGeneratorActivityTest {
 
         QRGeneratorActivity qRGeneratorActivity = new QRGeneratorActivity();
 
-        qRGeneratorActivity.QRGen(url_expected, "qrimageexpected.jpg");
-        File imgFile = new File(filepath_expected);
-        Bitmap myBitmapexpected = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+        Bitmap myBitmapexpected = qRGeneratorActivity.QRGen(url_expected, "qrimageexpected.jpg");
+        //File imgFile = new File(filepath_expected);
+        //Bitmap myBitmapexpected = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
 
 
-        qRGeneratorActivity.QRGen(url_test, "qrimage.jpg");
-        File imgFile2 = new File(filepath_result);
-         Bitmap myBitmapresult = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
+        Bitmap myBitmapresult = qRGeneratorActivity.QRGen(url_test, "qrimage.jpg");
+        //File imgFile2 = new File(filepath_result);
+        //Bitmap myBitmapresult = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
 
          if (myBitmapresult.sameAs(myBitmapexpected)) {
             result = "true";
