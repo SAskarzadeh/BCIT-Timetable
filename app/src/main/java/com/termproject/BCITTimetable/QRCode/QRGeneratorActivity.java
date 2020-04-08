@@ -1,6 +1,7 @@
 package com.termproject.BCITTimetable.QRCode;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Environment;
 
@@ -11,10 +12,15 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.ByteBuffer;
 
 public class QRGeneratorActivity {
 
     public static void QRGen(String url) {
+
+        byte[] buff = null;
+        String filepath = Environment.getExternalStorageDirectory().getAbsolutePath()
+                + File.separator + "qrimage.jpg";
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         try {
@@ -29,17 +35,26 @@ public class QRGeneratorActivity {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 60, bytes);
 
-            File  f= new File(Environment.getExternalStorageDirectory().getAbsolutePath()
-                    + File.separator + "qrimage.jpg");
+            File  f= new File(filepath);
             f.createNewFile();
             FileOutputStream fo = new FileOutputStream(f);
             fo.write(bytes.toByteArray());
             fo.close();
             //imageView.setImageBitmap(bitmap);
 
+//            Bitmap myBitmapexpected = BitmapFactory.decodeFile(f.getAbsolutePath());
+//
+//            ByteBuffer buffer1 = ByteBuffer.allocate(myBitmapexpected.getHeight() * myBitmapexpected.getRowBytes());
+//            myBitmapexpected.copyPixelsToBuffer(buffer1);
+//            buff = buffer1.array();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        finally {
+//            return(buff);
+//        }
 
     }
+
     }
