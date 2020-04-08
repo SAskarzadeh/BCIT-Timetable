@@ -32,8 +32,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.termproject.BCITTimetable.Main.MainActivity;
-import com.termproject.BCITTimetable.QRCode.QRDisplayedActivity;
-import com.termproject.BCITTimetable.QRCode.QRGeneratorActivity;
+import com.termproject.BCITTimetable.UnitTest.QRDisplayedActivity;
+import com.termproject.BCITTimetable.UnitTest.QRGeneratorActivity;
 import com.termproject.BCITTimetable.R;
 
 import org.json.JSONArray;

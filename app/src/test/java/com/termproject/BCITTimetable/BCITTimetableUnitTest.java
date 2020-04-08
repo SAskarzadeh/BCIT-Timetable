@@ -1,7 +1,5 @@
 package com.termproject.BCITTimetable;
 
-import com.termproject.BCITTimetable.QRCode.QRGeneratorActivity;
-
 import org.junit.Test;
 
 import java.io.File;

@@ -1,7 +1,6 @@
-package com.termproject.BCITTimetable.QRCode;
+package com.termproject.BCITTimetable.UnitTest;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Environment;
 
@@ -12,7 +11,6 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.ByteBuffer;
 
 public class QRGeneratorActivity {
 

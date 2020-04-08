@@ -1,4 +1,4 @@
-package com.termproject.BCITTimetable;
+package com.termproject.BCITTimetable.EspressoUITest;
 
 import android.os.SystemClock;
 
@@ -6,10 +6,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.termproject.BCITTimetable.Main.MainActivity;
+import com.termproject.BCITTimetable.R;
 
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -36,7 +38,7 @@ public class TimetableTest {
 
         //School of Energy - Instructor
         SystemClock.sleep(1000);
-        onView(withId(R.id.btnEnergy)).perform(click());
+        onView(ViewMatchers.withId(R.id.btnEnergy)).perform(click());
         SystemClock.sleep(1000);
         onView(withId(R.id.btnInstructor)).perform(click());
         SystemClock.sleep(500);
