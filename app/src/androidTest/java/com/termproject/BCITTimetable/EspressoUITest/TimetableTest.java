@@ -35,6 +35,7 @@ public class TimetableTest {
 
     @Test
     public void TestFilter() {
+
         
         //School of Energy - Instructor
         SystemClock.sleep(1000);
