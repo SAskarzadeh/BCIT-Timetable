@@ -37,6 +37,7 @@ public class TimetableTest {
     public void TestFilter() {
 
 
+        
         //School of Energy - Instructor
         SystemClock.sleep(1000);
         onView(ViewMatchers.withId(R.id.btnEnergy)).perform(click());
